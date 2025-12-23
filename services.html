@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <title>STACKLY | Cinematic Legal Services</title>
+
+    <!-- GSAP for Professional Motion Architecture -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --gold: #c5a059;
+        --gold-muted: #8e7340;
+        --ivory: #fdfcf9;
+        --dim: #a0a0a0;
+        --border: rgba(197, 160, 89, 0.2);
+        --serif: "Times New Roman", Times, serif;
+        --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        --safe-pad: clamp(1rem, 5vw, 2.5rem);
+      }
+
+      /* --- GLOBAL RESET & FOUNDATION --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      html,
+      body {
+        width: 100%;
+        background-color: var(--bg);
+        color: var(--ivory);
+        font-family: var(--sans);
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Film Grain Texture */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_pnt_noise.png");
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: var(--serif);
+        font-weight: normal;
+      }
+      p {
+        line-height: 1.6;
+        color: var(--dim);
+      }
+
+      .label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.4em;
+        color: var(--gold);
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      /* --- 1. OPENING ACT (HERO) --- */
+      .hero {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: var(--safe-pad);
+        overflow: hidden;
+        background: #000;
+      }
+
+      .hero-visual {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.6;
+      }
+
+      .hero-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        max-width: 800px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 10vw, 5.5rem);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+      }
+
+      .hero-sub {
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      /* --- 2. PHILOSOPHY SECTION --- */
+      .philosophy {
+        padding: 20vh var(--safe-pad);
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .p-line {
+        font-size: clamp(1.2rem, 5vw, 2.2rem);
+        margin-bottom: 2rem;
+        color: var(--ivory);
+        opacity: 0.2; /* Targeted by GSAP */
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--border);
+        width: 0%;
+        margin: 4rem 0;
+      }
+
+      /* --- 3. CORE SERVICE CHAPTERS --- */
+      .chapter {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        padding: var(--safe-pad);
+        overflow: hidden;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .chapter-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        transform: scale(1.1);
+      }
+
+      .chapter-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.4) contrast(1.1);
+      }
+
+      .chapter-content {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 500px;
+        padding-bottom: 8vh;
+      }
+
+      .chapter-title {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+        margin-bottom: 1rem;
+        color: var(--gold);
+      }
+
+      .chapter-body {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+        border-left: 2px solid var(--gold);
+        padding-left: 1.5rem;
+      }
+
+      .chapter-highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .highlight-item {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border);
+      }
+
+      /* --- 4. MOTION INTERLUDE --- */
+      .interlude {
+        height: 100vh;
+        background: #000;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .flow-line {
+        position: absolute;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        width: 100%;
+        opacity: 0.4;
+      }
+
+      /* --- 5. HOW WE DELIVER (PROCESS) --- */
+      .process {
+        padding: 15vh var(--safe-pad);
+        background: var(--bg);
+      }
+
+      .process-track {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .process-step {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 12vh;
+        position: relative;
+        opacity: 0.3;
+      }
+
+      .step-indicator {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--serif);
+        flex-shrink: 0;
+        background: var(--bg);
+        z-index: 2;
+      }
+
+      .step-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--gold);
+      }
+
+      /* --- 6. PROOF SECTION --- */
+      .proof {
+        padding: 10vh var(--safe-pad);
+        background: #080808;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .stat-card {
+        padding: 2rem 1rem;
+        border: 1px solid var(--border);
+        text-align: center;
+      }
+
+      .stat-val {
+        font-family: var(--serif);
+        font-size: 2.5rem;
+        color: var(--gold);
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--dim);
+      }
+
+      /* --- 7. HUMAN ELEMENT --- */
+      .human {
+        padding: 15vh var(--safe-pad);
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .human-visual {
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+
+      .human-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* --- 8. FINALE --- */
+      .finale {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: var(--safe-pad);
+        position: relative;
+        background: #000;
+      }
+
+      .finale-bg {
+        position: absolute;
+        inset: 0;
+        opacity: 0.2;
+      }
+
+      .finale-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .cta-btn {
+        width: 100%;
+        max-width: 340px;
+        padding: 1.5rem;
+        background: var(--gold);
+        color: #000;
+        border: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        font-size: 0.8rem;
+        margin-top: 3rem;
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Desktop Enhancements */
+      @media (min-width: 1024px) {
+        .chapter-content {
+          max-width: 700px;
+          padding-left: 10vw;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+        .human {
+          flex-direction: row;
+          align-items: center;
+        }
+        .human-visual {
+          width: 50%;
+          height: 600px;
+        }
+        .human-text {
+          width: 40%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- ACT 1: HERO -->
+      <section class="hero">
+        <div class="hero-visual">
+          <img
+            src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=2000"
+            alt="Courtroom"
+          />
+        </div>
+        <div class="hero-content">
+          <span class="label">Stackly Intelligence</span>
+          <h1 class="hero-title">Legal Services, Delivered With Precision.</h1>
+          <p class="hero-sub">
+            Where high-stakes complexity meets architectural strategy. We don't
+            just practice law; we engineer outcomes.
+          </p>
+        </div>
+      </section>
+
+      <!-- ACT 2: PHILOSOPHY -->
+      <section class="philosophy">
+        <span class="label">Our Approach</span>
+        <div class="p-line">
+          We believe the law is not a static set of rules, but a dynamic field
+          of energy.
+        </div>
+        <div class="p-line">
+          Every case is a narrative waiting to be mastered.
+        </div>
+        <div class="p-line">
+          Preparation is our obsession. Excellence is our baseline.
+        </div>
+        <div class="divider"></div>
+      </section>
+
+      <!-- ACT 3: CORE CHAPTERS -->
+
+      <!-- Chapter 1 -->
+      <section class="chapter">
+        <div class="chapter-bg">
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1500"
+            alt="Architecture"
+          />
+        </div>
+        <div class="chapter-content">
+          <span class="label">Chapter 01</span>
+          <h2 class="chapter-title">Corporate Strategy</h2>
+          <div class="chapter-body">
+            Navigating global compliance and high-value mergers requires more
+            than a signature. It requires a vision of the entire market
+            landscape and the foresight to mitigate risk before it emerges.
+          </div>
+          <div class="chapter-highlights">
+            <div class="highlight-item">M&A Advisory</div>
+            <div class="highlight-item">Global Compliance</div>
+            <div class="highlight-item">Risk Engineering</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chapter 2 -->
+      <section class="chapter">
+        <div class="chapter-bg">
+          <img
+            src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=1500"
+            alt="Statue"
+          />
+        </div>
+        <div class="chapter-content">
+          <span class="label">Chapter 02</span>
+          <h2 class="chapter-title">Criminal Defense</h2>
+          <div class="chapter-body">
+            When liberty is on the line, the margins for error disappear. We
+            provide aggressive, forensic-level defense strategies that dismantle
+            opposition arguments through sheer intellectual force.
+          </div>
+          <div class="chapter-highlights">
+            <div class="highlight-item">White Collar</div>
+            <div class="highlight-item">Forensic Audit</div>
+            <div class="highlight-item">Crisis Response</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chapter 3 -->
+      <section class="chapter">
+        <div class="chapter-bg">
+          <img
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1500"
+            alt="Tech"
+          />
+        </div>
+        <div class="chapter-content">
+          <span class="label">Chapter 03</span>
+          <h2 class="chapter-title">Intellectual Property</h2>
+          <div class="chapter-body">
+            Innovation is the currency of the future. We shield your
+            intellectual assets with a global framework of protection, ensuring
+            your breakthroughs remain your competitive advantage.
+          </div>
+          <div class="chapter-highlights">
+            <div class="highlight-item">Patent Armor</div>
+            <div class="highlight-item">Trade Secrets</div>
+            <div class="highlight-item">Tech Litigaton</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 4: MOTION INTERLUDE -->
+      <section class="interlude">
+        <div class="flow-line" style="top: 20%"></div>
+        <div class="flow-line" style="top: 40%"></div>
+        <div class="flow-line" style="top: 60%"></div>
+        <div class="flow-line" style="top: 80%"></div>
+        <div style="z-index: 10; text-align: center">
+          <span class="label">The Stackly Flow</span>
+          <h2 style="font-size: 2.5rem; font-style: italic">
+            Where Logic Becomes Action.
+          </h2>
+        </div>
+      </section>
+
+      <!-- ACT 5: THE JOURNEY -->
+      <section class="process">
+        <div class="process-track">
+          <span class="label">Our Delivery Roadmap</span>
+          <div style="margin-top: 4rem">
+            <div class="process-step">
+              <div class="step-indicator">01</div>
+              <div class="step-content">
+                <h3>Deep Intelligence</h3>
+                <p>
+                  We extract every pertinent detail, uncovering the hidden
+                  variables that define the case landscape.
+                </p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="step-indicator">02</div>
+              <div class="step-content">
+                <h3>Strategic Blueprint</h3>
+                <p>
+                  A multi-disciplinary map is drawn, pressure-testing every
+                  potential outcome before a single move is made.
+                </p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="step-indicator">03</div>
+              <div class="step-content">
+                <h3>Forceful Execution</h3>
+                <p>
+                  We deploy our resources with decisive speed, maintaining the
+                  initiative until the objective is secured.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 6: PROOF -->
+      <section class="proof">
+        <span class="label">Quantitative Authority</span>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-val" data-target="24">0</span>
+            <span class="stat-label">Years of Excellence</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-val" data-target="98">0%</span>
+            <span class="stat-label">Success Ratio</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-val" data-target="1.2">0</span>
+            <span class="stat-label">$B Recovered</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-val" data-target="450">0</span>
+            <span class="stat-label">Expert Partners</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 7: HUMAN ELEMENT -->
+      <section class="human">
+        <div class="human-visual">
+          <img
+            src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=1500"
+            alt="Team"
+          />
+        </div>
+        <div class="human-text">
+          <span class="label">The Human Factor</span>
+          <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem">
+            Confidentiality. Integrity. Responsibility.
+          </h2>
+          <p>
+            Behind the metrics and the motion graphics are real lives and
+            critical legacies. We carry the weight of our clients' trust as our
+            primary directive.
+          </p>
+        </div>
+      </section>
+
+      <!-- ACT 8: FINALE -->
+      <section class="finale">
+        <div class="finale-bg">
+          <img
+            src="https://images.unsplash.com/photo-1449156001931-8283327360b3?auto=format&fit=crop&q=80&w=2000"
+            alt="Skyline"
+          />
+        </div>
+        <div style="z-index: 10">
+          <span class="label">Case Initiation</span>
+          <h2 style="font-size: clamp(2.5rem, 10vw, 5rem); font-style: italic">
+            Command your future.
+          </h2>
+          <button class="cta-btn">Speak With Our Experts</button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. HERO ANIMATIONS
+        gsap.to(".hero-visual img", {
+          scale: 1.3,
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        gsap.to(".hero-content", {
+          y: -100,
+          opacity: 0,
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "50% top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        // 2. PHILOSOPHY REVEAL
+        gsap.utils.toArray(".p-line").forEach((line) => {
+          gsap.to(line, {
+            opacity: 1,
+            scrollTrigger: {
+              trigger: line,
+              start: "top 80%",
+              end: "top 40%",
+              scrub: true,
+            },
+          });
+        });
+
+        gsap.to(".divider", {
+          width: "100%",
+          scrollTrigger: {
+            trigger: ".divider",
+            start: "top 90%",
+            end: "top 70%",
+            scrub: true,
+          },
+        });
+
+        // 3. CHAPTER SCRUBBING
+        gsap.utils.toArray(".chapter").forEach((chapter) => {
+          const bg = chapter.querySelector(".chapter-bg img");
+          const content = chapter.querySelector(".chapter-content");
+
+          gsap.to(bg, {
+            scale: 1,
+            y: 100,
+            scrollTrigger: {
+              trigger: chapter,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+
+          gsap.from(content, {
+            x: -50,
+            opacity: 0,
+            duration: 1.5,
+            scrollTrigger: {
+              trigger: chapter,
+              start: "top 60%",
+            },
+          });
+        });
+
+        // 4. MOTION INTERLUDE
+        gsap.utils.toArray(".flow-line").forEach((line, i) => {
+          gsap.to(line, {
+            x: i % 2 === 0 ? 200 : -200,
+            scrollTrigger: {
+              trigger: ".interlude",
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1,
+            },
+          });
+        });
+
+        // 5. PROCESS STEPS
+        gsap.utils.toArray(".process-step").forEach((step) => {
+          gsap.to(step, {
+            opacity: 1,
+            scrollTrigger: {
+              trigger: step,
+              start: "top 70%",
+              end: "top 30%",
+              toggleActions: "play reverse play reverse",
+            },
+          });
+        });
+
+        // 6. STATS COUNTER
+        const animateStats = (el, target) => {
+          let current = 0;
+          const duration = 2000; // ms
+          const start = performance.now();
+          const isPercent = el.innerText.includes("%");
+          const isFloat = target.includes(".");
+
+          const update = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const val = progress * parseFloat(target);
+            el.innerText =
+              (isFloat ? val.toFixed(1) : Math.floor(val)) +
+              (isPercent ? "%" : "");
+            if (progress < 1) requestAnimationFrame(update);
+          };
+          requestAnimationFrame(update);
+        };
+
+        ScrollTrigger.create({
+          trigger: ".stats-grid",
+          start: "top 80%",
+          onEnter: () => {
+            document.querySelectorAll(".stat-val").forEach((el) => {
+              animateStats(el, el.dataset.target);
+            });
+          },
+        });
+
+        // 7. FINALE PARALLAX
+        gsap.to(".finale-bg img", {
+          y: -150,
+          scrollTrigger: {
+            trigger: ".finale",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        // BUTTON INTERACTION
+        const cta = document.querySelector(".cta-btn");
+        cta.addEventListener("touchstart", () => {
+          gsap.to(cta, { scale: 0.95, duration: 0.1 });
+        });
+        cta.addEventListener("touchend", () => {
+          gsap.to(cta, { scale: 1, duration: 0.1 });
+        });
+      });
+    </script>
+  </body>
+</html>

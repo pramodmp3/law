@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STACKLY | Elite Legal Counsel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="./nav.css" />
+  </head>
+  <body>
+    <nav class="nav-container" id="mainNav">
+      <div class="inner-nav">
+        <div class="logo-box">
+          <img src="./assets/logo.webp" alt="STACKLY" class="logo-img" />
+        </div>
+
+        <ul class="nav-links-desktop">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Home <span class="chevron"></span></a>
+            <div class="desktop-dropdown">
+              <a href="./index.html" class="dropdown-item">HOME1</a>
+              <a href="./home.html" class="dropdown-item">HOME2</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="./serve.html" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="./about.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="./dash.html" class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a href="./blog.html" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="./contact.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+
+        <div class="cta-desktop">
+          <a href="./login.html"><button class="btn-gold">Login</button></a>
+        </div>
+
+        <div class="mobile-controls">
+          <div class="hamburger" id="navToggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay">
+      <div class="mobile-menu-list">
+        <div class="mobile-nav-item">
+          <div class="mobile-nav-link" id="mobileHomeBtn">
+            Home <span class="mobile-chevron" id="mobileChevron"></span>
+          </div>
+          <div class="mobile-sub-menu" id="mobileSubMenu">
+            <a href="./index.html" class="mobile-sub-item">HOME1</a>
+            <a href="./home.html" class="mobile-sub-item">HOME2</a>
+          </div>
+        </div>
+
+        <div class="mobile-nav-item">
+          <a href="./serve.html" class="mobile-nav-link">Services</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./about.html" class="mobile-nav-link">About</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./dash.html" class="mobile-nav-link">Dashboard</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./blog.html" class="mobile-nav-link">Blog</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./contact.html" class="mobile-nav-link">Contact</a>
+        </div>
+
+        <div style="margin-top: 40px">
+          <a href="./login.html"
+            ><button class="btn-gold" style="width: 100%; padding: 20px">
+              Login Account
+            </button></a
+          >
+        </div>
+      </div>
+    </div>
+    <script src="./nav.js"></script>
+  </body>
+</html>

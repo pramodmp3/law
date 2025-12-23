@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <title>STACKLY | Secure Legal Access</title>
+    <!-- GSAP for Smooth, Performant Motion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-deep: #080809;
+        --gold-primary: #c5a059;
+        --gold-muted: #8e7343;
+        --gold-glow: rgba(197, 160, 89, 0.12);
+        --text-ivory: #f4f1ea;
+        --text-dim: #8a8a8a;
+        --glass-bg: rgba(22, 22, 24, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --serif-font: "Times New Roman", Times, serif;
+        --sans-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        --container-padding: 24px;
+      }
+
+      /* --- RESET & MOBILE-FIRST SAFETY --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background-color: var(--bg-deep);
+        color: var(--text-ivory);
+        font-family: var(--sans-font);
+        line-height: 1.5;
+      }
+
+      /* --- CINEMATIC STAGE --- */
+      .stage {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background: radial-gradient(
+          circle at 50% 20%,
+          #1a1a1c 0%,
+          #080809 100%
+        );
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .ambient-glow {
+        position: absolute;
+        width: 150vmax;
+        height: 150vmax;
+        background: radial-gradient(
+          circle at center,
+          var(--gold-glow) 0%,
+          transparent 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.6;
+      }
+
+      .film-grain {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+        opacity: 0.03;
+      }
+
+      /* --- LAYOUT CONTAINER --- */
+      .login-wrapper {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100svh;
+        width: 100%;
+        padding: var(--container-padding);
+      }
+
+      /* --- BRANDING --- */
+      .brand {
+        text-align: center;
+        margin-bottom: clamp(32px, 8vh, 60px);
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      .logo-svg {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 16px;
+        filter: drop-shadow(0 0 10px var(--gold-glow));
+      }
+
+      .brand-name {
+        font-family: var(--serif-font);
+        font-size: clamp(2rem, 8vw, 2.75rem);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-weight: 300;
+        background: linear-gradient(to bottom, #fff, var(--gold-primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .tagline {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.4em;
+        color: var(--gold-muted);
+        margin-top: 8px;
+      }
+
+      /* --- LOGIN CARD --- */
+      .login-card {
+        width: 100%;
+        max-width: 420px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 4px;
+        padding: clamp(30px, 10vw, 48px) clamp(20px, 5vw, 40px);
+        position: relative;
+        opacity: 0;
+        transform: scale(0.98);
+      }
+
+      .border-sweep {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold-primary),
+          transparent
+        );
+        pointer-events: none;
+      }
+
+      /* --- FORM ELEMENTS --- */
+      .form-group {
+        margin-bottom: 24px;
+      }
+
+      .label {
+        display: block;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gold-muted);
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .input-field {
+        width: 100%;
+        height: 52px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        border-radius: 2px;
+        padding: 0 16px;
+        color: var(--text-ivory);
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.4s ease;
+      }
+
+      .input-field:focus {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: var(--gold-muted);
+        box-shadow: 0 0 15px var(--gold-glow);
+      }
+
+      .btn-login {
+        width: 100%;
+        height: 54px;
+        background: linear-gradient(135deg, #c5a059 0%, #8e7343 100%);
+        border: none;
+        color: #000;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 0.8rem;
+        border-radius: 2px;
+        margin-top: 12px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* --- FOOTER ELEMENTS --- */
+      .support-links {
+        margin-top: 24px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .link {
+        font-size: 0.75rem;
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .link:hover,
+      .link:active {
+        color: var(--gold-primary);
+      }
+
+      .legal-footer {
+        margin-top: 40px;
+        text-align: center;
+        max-width: 320px;
+      }
+
+      .disclaimer {
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.2);
+        line-height: 1.6;
+      }
+
+      /* --- RESPONSIVE ENHANCEMENTS --- */
+      @media (min-width: 768px) {
+        .btn-login:hover {
+          transform: translateY(-2px);
+          filter: brightness(1.1);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="ambient-glow" id="ambientLight"></div>
+      <div class="film-grain"></div>
+    </div>
+
+    <main class="login-wrapper">
+      <header class="brand" id="brand">
+        <!-- <svg class="logo-svg" viewBox="0 0 100 100" fill="none">
+          <path
+            d="M50 5L10 25V75L50 95L90 75V25L50 5Z"
+            stroke="#c5a059"
+            stroke-width="2"
+          />
+          <path
+            d="M50 20V80"
+            stroke="#c5a059"
+            stroke-width="2"
+            stroke-opacity="0.4"
+          />
+          <path
+            d="M30 40H70"
+            stroke="#c5a059"
+            stroke-width="2"
+            stroke-opacity="0.2"
+          />
+        </svg> -->
+        <h1 class="brand-name">Stackly</h1>
+        <p class="tagline">Justice. Integrity. Excellence.</p>
+      </header>
+
+      <section class="login-card" id="loginCard">
+        <div class="border-sweep" id="sweep"></div>
+
+        <form id="loginForm" action="./404.html">
+          <div class="form-group">
+            <label class="label">Legal Identifier</label>
+            <input
+              type="email"
+              class="input-field"
+              placeholder="ID / Email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="label">Security Credential</label>
+            <input
+              type="password"
+              class="input-field"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-login" id="submitBtn">
+            Initialize Access
+          </button>
+        </form>
+
+        <div class="support-links">
+          <a href="./404.html" class="link">Reset Access</a>
+          <a href="./signup.html" class="link">Create Account</a>
+        </div>
+      </section>
+
+      <footer class="legal-footer">
+        <p class="disclaimer">
+          Unauthorized access is strictly prohibited. This system is monitored
+          in compliance with global legal standards.
+        </p>
+      </footer>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+        // 1. Entrance Sequence
+        tl.to("#brand", { duration: 1.5, opacity: 1, y: 0 }).to(
+          "#loginCard",
+          { duration: 1.2, opacity: 1, scale: 1 },
+          "-=1"
+        );
+
+        // 2. Loop Cinematic Sweep
+        gsap.to("#sweep", {
+          left: "100%",
+          duration: 3,
+          repeat: -1,
+          repeatDelay: 4,
+          ease: "power2.inOut",
+        });
+
+        // 3. Mobile Parallax (Tilt/Scroll)
+        document.addEventListener("mousemove", (e) => {
+          const x = e.clientX / window.innerWidth - 0.5;
+          const y = e.clientY / window.innerHeight - 0.5;
+
+          gsap.to("#ambientLight", {
+            duration: 2,
+            x: x * 60,
+            y: y * 60,
+            ease: "power2.out",
+          });
+
+          // Desktop Tilt Enhancement
+          if (window.innerWidth > 768) {
+            gsap.to("#loginCard", {
+              duration: 0.5,
+              rotationY: x * 5,
+              rotationX: -y * 5,
+              ease: "power1.out",
+            });
+          }
+        });
+
+        // 4. Interactive Feedback
+        const btn = document.getElementById("submitBtn");
+        btn.addEventListener("touchstart", () =>
+          gsap.to(btn, { scale: 0.98, duration: 0.1 })
+        );
+        btn.addEventListener("touchend", () =>
+          gsap.to(btn, { scale: 1, duration: 0.1 })
+        );
+      });
+
+      function handleLogin(e) {
+        e.preventDefault();
+        const btn = document.getElementById("submitBtn");
+        const card = document.getElementById("loginCard");
+
+        btn.innerText = "VERIFYING...";
+        btn.style.opacity = "0.7";
+
+        // Heavy Cinematic Auth Shake on Error (Simulated)
+        setTimeout(() => {
+          gsap.to(card, {
+            x: 10,
+            duration: 0.1,
+            repeat: 5,
+            yoyo: true,
+            ease: "power2.inOut",
+            onComplete: () => {
+              gsap.to(card, { x: 0, duration: 0.2 });
+              btn.innerText = "ACCESS DENIED";
+              btn.style.background =
+                "linear-gradient(135deg, #8b0000 0%, #4a0000 100%)";
+              btn.style.color = "#fff";
+
+              setTimeout(() => {
+                btn.innerText = "INITIALIZE ACCESS";
+                btn.style.background = "";
+                btn.style.color = "";
+                btn.style.opacity = "1";
+              }, 2000);
+            },
+          });
+        }, 1200);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <title>STACKLY | Cinematic Legal Services</title>
+
+    <!-- GSAP for Professional Motion Architecture -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="./serve.css" />
+  </head>
+  <body>
+    <nav class="nav-container" id="mainNav">
+      <div class="inner-nav">
+        <div class="logo-box">
+          <img src="./assets/logo.webp" alt="STACKLY" class="logo-img" />
+        </div>
+
+        <ul class="nav-links-desktop">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Home <span class="chevron"></span></a>
+            <div class="desktop-dropdown">
+              <a href="./index.html" class="dropdown-item">HOME1</a>
+              <a href="./home.html" class="dropdown-item">HOME2</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="./serve.html" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="./about.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="./dash.html" class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a href="./blog.html" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="./contact.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+
+        <div class="cta-desktop">
+          <a href="./login.html"><button class="btn-gold">Login</button></a>
+        </div>
+
+        <div class="mobile-controls">
+          <div class="hamburger" id="navToggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay">
+      <div class="mobile-menu-list">
+        <div class="mobile-nav-item">
+          <div class="mobile-nav-link" id="mobileHomeBtn">
+            Home <span class="mobile-chevron" id="mobileChevron"></span>
+          </div>
+          <div class="mobile-sub-menu" id="mobileSubMenu">
+            <a href="./index.html" class="mobile-sub-item">HOME1</a>
+            <a href="./home.html" class="mobile-sub-item">HOME2</a>
+          </div>
+        </div>
+
+        <div class="mobile-nav-item">
+          <a href="./serve.html" class="mobile-nav-link">Services</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./about.html" class="mobile-nav-link">About</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./dash.html" class="mobile-nav-link">Dashboard</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./blog.html" class="mobile-nav-link">Blog</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./contact.html" class="mobile-nav-link">Contact</a>
+        </div>
+
+        <div style="margin-top: 40px">
+          <a href="./login.html"
+            ><button class="btn-gold" style="width: 100%; padding: 20px">
+              Login Account
+            </button></a
+          >
+        </div>
+      </div>
+    </div>
+    <main>
+      <!-- ACT 1: HERO -->
+      <section class="hero">
+        <div class="hero-visual">
+          <img src="./assets/about2.webp" alt="Lens" />
+        </div>
+        <div class="hero-content">
+          <span class="label reveal-parent"
+            ><span class="reveal-child">Institutional Authority</span></span
+          >
+          <h1 class="hero-title reveal-parent">
+            <span class="reveal-child">Architects of</span>
+            <span class="reveal-child">Legal Resolution.</span>
+          </h1>
+          <p class="hero-sub">
+            Providing elite representation and tactical advisory for the world's
+            most complex industrial and private challenges.
+          </p>
+        </div>
+      </section>
+
+      <!-- ACT 2: PHILOSOPHY -->
+      <section class="philosophy">
+        <span class="label reveal-parent"
+          ><span class="reveal-child">The Doctrine</span></span
+        >
+        <div class="p-line">
+          We do not react to the landscape; we reshape it through superior
+          intelligence.
+        </div>
+        <div class="p-line">
+          In the theater of conflict, clarity is the ultimate weapon.
+        </div>
+        <div class="p-line">
+          Silence is our shield, and precision is our signature.
+        </div>
+      </section>
+
+      <!-- ACT 3: STATS -->
+      <section class="stats-strip">
+        <div class="stat-item">
+          <span class="stat-val" data-target="98">0</span>
+          <span class="stat-label">Success Percentage</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" data-target="420">0</span>
+          <span class="stat-label">Billion Under Management</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" data-target="15">0</span>
+          <span class="stat-label">Global Jurisdictions</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" data-target="120">0</span>
+          <span class="stat-label">Senior Partners</span>
+        </div>
+      </section>
+
+      <!-- ACT 4: CHAPTERS -->
+      <section class="chapter">
+        <div class="chapter-bg">
+          <img
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1500"
+            alt="Office"
+          />
+        </div>
+        <div class="chapter-content">
+          <span class="label">Chapter 01</span>
+          <h2 class="chapter-title reveal-parent">
+            <span class="reveal-child">Corporate Warfare</span>
+          </h2>
+          <p class="chapter-body">
+            Modern business is a battlefield. From hostile takeovers to
+            cross-border intellectual property disputes, we design defensive
+            structures that are impenetrable and offensive strategies that are
+            decisive. We represent 14 of the Fortune 50.
+          </p>
+          <div class="highlight-grid">
+            <div class="highlight-item">Hostile Defense</div>
+            <div class="highlight-item">IP Fortification</div>
+            <div class="highlight-item">Anti-Trust Shield</div>
+            <div class="highlight-item">Capital Restructuring</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-bg">
+          <img
+            src="https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?auto=format&fit=crop&q=80&w=1500"
+            alt="Scale"
+          />
+        </div>
+        <div class="chapter-content">
+          <span class="label">Chapter 02</span>
+          <h2 class="chapter-title reveal-parent">
+            <span class="reveal-child">Sovereign Disputes</span>
+          </h2>
+          <p class="chapter-body">
+            Navigating the friction between corporate interests and national
+            policy requires a diplomatic touch backed by absolute legal
+            authority. We bridge the gap between regulatory demand and
+            institutional progress.
+          </p>
+          <div class="highlight-grid">
+            <div class="highlight-item">Treaty Advisory</div>
+            <div class="highlight-item">Maritime Law</div>
+            <div class="highlight-item">Diplomatic Immunity</div>
+            <div class="highlight-item">Trade Sanctions</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 5: THE VAULT (GRID) -->
+      <section class="vault">
+        <span class="label">The Specialist Vault</span>
+        <div class="vault-grid">
+          <div class="vault-card">
+            <div>
+              <h3>Private Wealth</h3>
+              <p>
+                Protecting generational legacies through sophisticated offshore
+                structures and tax optimization.
+              </p>
+            </div>
+            <span class="label" style="margin: 0; font-size: 0.6rem"
+              >High Net Worth</span
+            >
+          </div>
+          <div class="vault-card">
+            <div>
+              <h3>Cyber Defense</h3>
+              <p>
+                Navigating the legal fallout of state-sponsored breaches and
+                data sovereignty conflicts.
+              </p>
+            </div>
+            <span class="label" style="margin: 0; font-size: 0.6rem"
+              >Digital Frontier</span
+            >
+          </div>
+          <div class="vault-card">
+            <div>
+              <h3>Emerging Tech</h3>
+              <p>
+                Drafting the legal frameworks for AI governance, decentralized
+                finance, and orbital commerce.
+              </p>
+            </div>
+            <span class="label" style="margin: 0; font-size: 0.6rem"
+              >Future Proof</span
+            >
+          </div>
+          <div class="vault-card">
+            <div>
+              <h3>Lorem Epsum</h3>
+              <p>
+                Drafting the legal frameworks for AI governance, decentralized
+                finance, and orbital commerce.
+              </p>
+            </div>
+            <span class="label" style="margin: 0; font-size: 0.6rem"
+              >Dolor Epsum</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 6: PROCESS -->
+      <section class="process">
+        <span class="label">The Protocol</span>
+        <div style="margin-top: 6rem">
+          <div class="process-step">
+            <div class="step-num">01</div>
+            <div>
+              <h3 class="reveal-parent">
+                <span class="reveal-child">Intelligence Infiltration</span>
+              </h3>
+              <p>
+                We don't wait for discovery. Our internal investigation teams
+                uncover the leverage points that others overlook, creating an
+                information asymmetry in your favor.
+              </p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">02</div>
+            <div>
+              <h3 class="reveal-parent">
+                <span class="reveal-child">Outcome Engineering</span>
+              </h3>
+              <p>
+                We build the endgame first. Every legal motion and public
+                statement is reverse-engineered from the final desired
+                resolution.
+              </p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">03</div>
+            <div>
+              <h3 class="reveal-parent">
+                <span class="reveal-child">Decisive Execution</span>
+              </h3>
+              <p>
+                When the timing is perfect, we move with overwhelming force to
+                close the matter, ensuring a result that is both final and
+                favorable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 8: FINALE -->
+      <section class="finale">
+        <div
+          class="finale-bg"
+          style="position: absolute; inset: 0; opacity: 0.15"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=2000"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <div style="z-index: 10">
+          <span class="label">Engagement</span>
+          <h2
+            id="finaleTitle"
+            style="font-size: clamp(3rem, 10vw, 7rem); font-style: italic"
+          >
+            Master your legacy.
+          </h2>
+          <a href="./404.html">
+            <button class="cta-btn">Initiate Consultation</button></a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="stk-footer" id="footer">
+      <div class="stk-bg">
+        <div class="stk-noise"></div>
+        <div class="stk-glow" id="glow"></div>
+      </div>
+
+      <div class="stk-container">
+        <!-- Brand -->
+        <div class="stk-brand">
+          <img
+            src="./assets/logo.webp"
+            alt="Stackly Logo"
+            class="stk-logo"
+            id="logo"
+          />
+          <p class="stk-motto" id="motto">
+            Crafting legal excellence with architectural precision. Founded on
+            the principles of integrity and global innovation.
+          </p>
+          <div class="stk-socials" id="socials">
+            <a href="./404.html" class="stk-icon"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                /></svg
+            ></a>
+            <a href="./404.html" class="stk-icon"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                /></svg
+            ></a>
+            <a href="./404.html" class="stk-icon"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.44-.645 1.44-1.441-.644-1.44-1.44-1.44z"
+                /></svg
+            ></a>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <span class="stk-label">Navigation</span>
+          <ul class="stk-links">
+            <li class="stk-link"><a href="./index.html">HOME</a></li>
+            <li class="stk-link"><a href="./serve.html">SERVICE</a></li>
+            <li class="stk-link"><a href="./about.html">ABOUT</a></li>
+            <li class="stk-link"><a href="./blog.html">BLOG</a></li>
+            <li class="stk-link"><a href="./dash.html">DASHBOARD</a></li>
+            <li class="stk-link"><a href="./contact.html">CONTACT</a></li>
+          </ul>
+        </div>
+
+        <!-- News -->
+        <div>
+          <span class="stk-label">Latest Briefs</span>
+          <div class="stk-news-item">
+            <span>JAN 10, 2025</span>
+            <h4>Future of AI in Corporate Governance</h4>
+          </div>
+          <div class="stk-news-item">
+            <span>JAN 04, 2025</span>
+            <h4>Cross-Border Tech M&A Trends</h4>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="stk-newsletter">
+          <span class="stk-label">The Counsel</span>
+          <p
+            style="
+              font-size: 13px;
+              color: var(--text-muted);
+              margin-bottom: -10px;
+            "
+          >
+            Monthly strategic briefings.
+          </p>
+          <div class="stk-input-wrap" id="newsletter">
+            <input type="email" class="stk-input" placeholder="Email Address" />
+            <button class="stk-btn">Join</button>
+          </div>
+          <div
+            style="font-size: 12px; color: var(--text-muted); line-height: 1.5"
+          >
+            <span style="color: var(--gold)">Address:</span> 1200 Wall St,
+            NYC<br />
+            <span style="color: var(--gold)">Enquiries:</span> +1 800 STACKLY
+          </div>
+        </div>
+      </div>
+
+      <div class="stk-bottom">
+        <span>© 2025 STACKLY INTERNATIONAL LLP</span>
+        <span>PRIVACY / TERMS / SECURITY</span>
+      </div>
+    </footer>
+
+    <script src="./footer.js"></script>
+    <script src="./nav.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. HERO REVEAL
+        const heroTl = gsap.timeline();
+        heroTl
+          .from(".hero-title .reveal-child", {
+            yPercent: 110,
+            duration: 1.5,
+            stagger: 0.15,
+            ease: "expo.out",
+          })
+          .from(
+            ".hero .label .reveal-child",
+            {
+              yPercent: 100,
+              duration: 1,
+            },
+            "-=1.2"
+          )
+          .to(
+            ".hero-sub",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1.5,
+            },
+            "-=0.8"
+          );
+
+        // 2. STATS COUNTER
+        gsap.utils.toArray(".stat-val").forEach((stat) => {
+          const target = parseInt(stat.getAttribute("data-target"));
+          gsap.to(stat, {
+            innerText: target,
+            duration: 2.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: stat,
+              start: "top 90%",
+            },
+            onUpdate: function () {
+              stat.innerText = Math.ceil(this.targets()[0].innerText);
+              if (target > 100) stat.innerText += "+";
+              else if (target === 98) stat.innerText += "%";
+            },
+          });
+        });
+
+        // 3. PHILOSOPHY SCROLL SENSE
+        gsap.utils.toArray(".p-line").forEach((line) => {
+          gsap.fromTo(
+            line,
+            { opacity: 0.05, filter: "blur(12px)", y: 40 },
+            {
+              opacity: 1,
+              filter: "blur(0px)",
+              y: 0,
+              scrollTrigger: {
+                trigger: line,
+                start: "top 85%",
+                end: "top 45%",
+                scrub: 1,
+              },
+            }
+          );
+        });
+
+        // 4. CHAPTER REVEALS
+        gsap.utils.toArray(".chapter").forEach((chapter) => {
+          gsap.from(chapter.querySelector(".chapter-content"), {
+            x: chapter.classList.contains("even") ? 100 : -100,
+            opacity: 0,
+            duration: 1.5,
+            scrollTrigger: {
+              trigger: chapter,
+              start: "top 50%",
+            },
+          });
+        });
+
+        // 5. FINALE CHAR REVEAL
+        const finaleTitle = document.getElementById("finaleTitle");
+        const text = finaleTitle.innerText;
+        finaleTitle.innerHTML = text
+          .split("")
+          .map(
+            (char) =>
+              `<span class="char" style="display:inline-block">${
+                char === " " ? "&nbsp;" : char
+              }</span>`
+          )
+          .join("");
+
+        gsap.from(".char", {
+          opacity: 0,
+          y: 50,
+          filter: "blur(15px)",
+          stagger: 0.04,
+          duration: 1.2,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: ".finale",
+            start: "top 40%",
+          },
+        });
+
+        // 6. BACKGROUND PARALLAX
+        gsap.to(".hero-visual img", {
+          y: 200,
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

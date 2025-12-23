@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STACKLY | Elite Law-Tech Navigation</title>
+    <link rel="stylesheet" href="./nav2.css" />
+  </head>
+  <body>
+    <nav class="stackly-nav" id="mainNav">
+      <div class="logo-container">
+        <img
+          src="./assets/logo.webp"
+          alt="S"
+          class="logo-img"
+          onerror="this.style.display='block'"
+        />
+        <!-- <span class="logo-text">STACKLY</span> -->
+      </div>
+
+      <ul class="menu-items">
+        <li class="dropdown">
+          <a href="#" class="nav-link">Home <span class="chevron">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="./home.html" class="dropdown-item">HOME2</a>
+            <a href="./index.html" class="dropdown-item">HOME1</a>
+          </div>
+        </li>
+        <li><a href="./products.html" class="nav-link">PRODUCTS</a></li>
+        <li><a href="./about2.html" class="nav-link">ABOUT</a></li>
+        <li><a href="./blog2.html" class="nav-link">BLOG</a></li>
+        <li>
+          <a
+            href="./contact2.html"
+            class="nav-link"
+            style="
+              padding: 10px 25px;
+              background: var(--accent-sapphire);
+              border-radius: 4px;
+              color: white;
+            "
+            >Contact</a
+          >
+        </li>
+      </ul>
+
+      <div class="mobile-toggle" id="mobileToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </nav>
+
+    <!-- Cinematic Mobile Center-Drop Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay">
+      <ul class="mobile-menu">
+        <li class="mobile-item" style="transition-delay: 0.1s">
+          <a href="#" class="mobile-link" id="mobileHomeToggle">
+            Home <span class="mobile-chevron">▼</span>
+          </a>
+          <div class="mobile-sub-menu" id="mobileSubMenu">
+            <a
+              href="./home.html"
+              class="mobile-sub-link"
+              style="transition-delay: 0.1s"
+              >HOME2</a
+            >
+            <a
+              href="./index.html"
+              class="mobile-sub-link"
+              style="transition-delay: 0.2s"
+              >HOME1</a
+            >
+          </div>
+        </li>
+        <li class="mobile-item" style="transition-delay: 0.2s">
+          <a href="./products.html" class="mobile-link">Products</a>
+        </li>
+        <li class="mobile-item" style="transition-delay: 0.3s">
+          <a href="./about2.html" class="mobile-link">About</a>
+        </li>
+        <li class="mobile-item" style="transition-delay: 0.4s">
+          <a href="./blog2.html" class="mobile-link">Blog</a>
+        </li>
+        <li class="mobile-item" style="transition-delay: 0.5s">
+          <a href="./contact2.html" class="mobile-link">Contact</a>
+        </li>
+      </ul>
+    </div>
+
+    <script src="./nav2.js"></script>
+  </body>
+</html>

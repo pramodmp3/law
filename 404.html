@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <title>404 | STACKLY | Authoritative Redirect</title>
+    <!-- GSAP for Smooth, Performant Motion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-deep: #080809;
+        --gold-primary: #c5a059;
+        --gold-muted: #7a633a;
+        --gold-glow: rgba(197, 160, 89, 0.1);
+        --text-ivory: #f4f1ea;
+        --text-dim: #8a8a8a;
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --serif-font: "Times New Roman", Times, serif;
+        --sans-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        --container-padding: 24px;
+      }
+
+      /* --- RESET & SAFETY --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background-color: var(--bg-deep);
+        color: var(--text-ivory);
+        font-family: var(--sans-font);
+        line-height: 1.5;
+      }
+
+      /* --- MOBILE-FIRST LAYOUT --- */
+      .root-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100svh; /* Mobile browser friendly height */
+        width: 100%;
+        padding: var(--container-padding);
+        position: relative;
+        text-align: center;
+        z-index: 2;
+      }
+
+      /* --- CINEMATIC BACKGROUND (MOBILE SAFE) --- */
+      .stage-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background: radial-gradient(
+          circle at 50% 30%,
+          #161618 0%,
+          #080809 100%
+        );
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .ambient-light {
+        position: absolute;
+        width: 150vmax;
+        height: 150vmax;
+        background: radial-gradient(
+          circle at center,
+          var(--gold-glow) 0%,
+          transparent 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.5;
+      }
+
+      /* --- CONTENT ELEMENTS --- */
+      .brand-logo {
+        max-width: 120px;
+        margin-bottom: clamp(30px, 8vh, 60px);
+        opacity: 0; /* Animation target */
+      }
+
+      .error-hero {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 16px;
+      }
+
+      .error-code {
+        font-family: var(--serif-font);
+        font-size: clamp(6rem, 25vw, 12rem);
+        font-weight: 300;
+        line-height: 0.9;
+        letter-spacing: -0.02em;
+        background: linear-gradient(to bottom, #f4f1ea, #c5a059);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: relative;
+        z-index: 2;
+      }
+
+      .text-sweep {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transform: skewX(-20deg);
+        z-index: 3;
+        pointer-events: none;
+      }
+
+      .statement {
+        font-family: var(--serif-font);
+        font-size: clamp(1.25rem, 5vw, 1.75rem);
+        margin-bottom: 12px;
+        font-style: italic;
+        max-width: 400px;
+      }
+
+      .reassurance {
+        font-size: 0.75rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 40px;
+        max-width: 320px;
+        line-height: 1.6;
+      }
+
+      /* --- ACTIONS (MOBILE-FIRST FULL WIDTH) --- */
+      .action-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+        gap: 12px;
+        opacity: 0; /* Animation target */
+      }
+
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 54px;
+        padding: 0 24px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        text-decoration: none;
+        transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1), opacity 0.3s;
+        border-radius: 2px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #c5a059 0%, #8e7343 100%);
+        color: #000;
+        border: none;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        border: 1px solid var(--glass-border);
+        color: var(--gold-primary);
+      }
+
+      /* --- ENHANCEMENTS (TABLET/DESKTOP) --- */
+      @media (min-width: 768px) {
+        .action-group {
+          flex-direction: row;
+          max-width: none;
+          justify-content: center;
+          gap: 20px;
+        }
+
+        .btn {
+          width: auto;
+          min-width: 220px;
+        }
+
+        .reassurance {
+          max-width: 500px;
+        }
+
+        .statement {
+          max-width: 600px;
+        }
+
+        .btn:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 10px 30px rgba(197, 160, 89, 0.15);
+        }
+      }
+
+      /* --- DECORATIVE ARCHITECTURE --- */
+      .pillar-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.2;
+      }
+
+      .pillar {
+        position: absolute;
+        width: 15vw;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, #1a1a1c, transparent);
+        filter: blur(30px);
+      }
+
+      .pillar-left {
+        left: 0;
+      }
+      .pillar-right {
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage-bg">
+      <div class="ambient-light" id="ambientLight"></div>
+      <div class="pillar-overlay">
+        <div class="pillar pillar-left"></div>
+        <div class="pillar pillar-right"></div>
+      </div>
+    </div>
+
+    <main class="root-container">
+      <div class="brand-logo" id="logo">
+        <svg
+          viewBox="0 0 100 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M50 5L10 25V75L50 95L90 75V25L50 5Z"
+            stroke="#c5a059"
+            stroke-width="2"
+          />
+          <path
+            d="M50 20V80"
+            stroke="#c5a059"
+            stroke-width="1.5"
+            stroke-opacity="0.5"
+          />
+          <path
+            d="M35 40H65"
+            stroke="#c5a059"
+            stroke-width="1.5"
+            stroke-opacity="0.3"
+          />
+          <path
+            d="M35 60H65"
+            stroke="#c5a059"
+            stroke-width="1.5"
+            stroke-opacity="0.3"
+          />
+        </svg>
+      </div>
+
+      <div class="error-hero">
+        <h1 class="error-code" id="errorCode">404</h1>
+        <div class="text-sweep" id="sweep"></div>
+      </div>
+
+      <p class="statement" id="statement">
+        The requested path is currently unavailable.
+      </p>
+      <p class="reassurance" id="reassurance">
+        Even the strongest cases take a wrong turn. We will guide you back to
+        safety.
+      </p>
+
+      <nav class="action-group" id="actions">
+        <a href="./index.html" class="btn btn-primary">Return to Chambers</a>
+        <a href="./serve.html" class="btn btn-secondary">Legal Support</a>
+      </nav>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+        // 1. Entrance Sequence
+        tl.to("#logo", {
+          duration: 1.5,
+          opacity: 0.6,
+          y: 0,
+          startAt: { y: -20 },
+        })
+          .to(
+            "#errorCode",
+            {
+              duration: 1.5,
+              opacity: 1,
+              scale: 1,
+              startAt: { opacity: 0, scale: 0.95 },
+            },
+            "-=1.2"
+          )
+          .to(
+            ["#statement", "#reassurance"],
+            {
+              duration: 1,
+              opacity: 1,
+              y: 0,
+              stagger: 0.2,
+              startAt: { opacity: 0, y: 15 },
+            },
+            "-=1"
+          )
+          .to(
+            "#actions",
+            { duration: 1, opacity: 1, y: 0, startAt: { opacity: 0, y: 15 } },
+            "-=0.8"
+          );
+
+        // 2. Continuous Ambient Motion
+        gsap.to("#sweep", {
+          left: "100%",
+          duration: 3,
+          repeat: -1,
+          repeatDelay: 4,
+          ease: "power2.inOut",
+        });
+
+        // 3. Subtle Parallax for Mobile (Tilt/Motion)
+        // Using Orientation or Mouse depending on availability
+        if (window.DeviceOrientationEvent) {
+          window.addEventListener("deviceorientation", (event) => {
+            const tiltX = event.beta / 45; // range approx -1 to 1
+            const tiltY = event.gamma / 45;
+
+            gsap.to("#ambientLight", {
+              duration: 1,
+              x: tiltY * 30,
+              y: tiltX * 30,
+              ease: "power1.out",
+            });
+          });
+        }
+
+        // Mouse fallback for Desktop
+        document.addEventListener("mousemove", (e) => {
+          const x = e.clientX / window.innerWidth - 0.5;
+          const y = e.clientY / window.innerHeight - 0.5;
+
+          gsap.to("#ambientLight", {
+            duration: 2,
+            x: x * 60,
+            y: y * 60,
+            ease: "power2.out",
+          });
+
+          gsap.to("#errorCode", {
+            duration: 1,
+            x: x * 15,
+            y: y * 10,
+            ease: "power1.out",
+          });
+        });
+
+        // 4. Touch Feedback
+        const buttons = document.querySelectorAll(".btn");
+        buttons.forEach((btn) => {
+          btn.addEventListener("touchstart", () => {
+            gsap.to(btn, { scale: 0.97, duration: 0.2 });
+          });
+          btn.addEventListener("touchend", () => {
+            gsap.to(btn, { scale: 1, duration: 0.2 });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

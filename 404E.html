@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>STACKLY | 404 Document Not Found</title>
+    <style>
+      /* * STACKLY 404 ARCHITECTURE
+         * Palette: Obsidian (#050506), Cyber Blue (#00d4ff), Titanium Silver (#e2e8f0)
+         */
+
+      :root {
+        --color-obsidian: #050506;
+        --color-deep-navy: #0a0f1a;
+        --color-titanium: #f8fafc;
+        --accent-primary: #00d4ff;
+        --accent-glow: rgba(0, 212, 255, 0.3);
+        --glass-bg: rgba(15, 23, 42, 0.9);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --font-main: "Segoe UI", system-ui, -apple-system, sans-serif;
+        --motion-slow: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        --motion-fast: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        background-color: var(--color-obsidian);
+        color: var(--color-titanium);
+        font-family: var(--font-main);
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* --- STABLE CINEMATIC BACKGROUND --- */
+      .canvas-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: radial-gradient(
+          circle at center,
+          var(--color-deep-navy) 0%,
+          var(--color-obsidian) 100%
+        );
+      }
+
+      .ambient-sweep {
+        position: absolute;
+        inset: -50%;
+        background: conic-gradient(
+          from 0deg at 50% 50%,
+          transparent 0deg,
+          rgba(0, 212, 255, 0.05) 180deg,
+          transparent 360deg
+        );
+        animation: rotateSweep 25s linear infinite;
+      }
+
+      @keyframes rotateSweep {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* --- MAIN CONTAINER --- */
+      .error-wrapper {
+        width: 100%;
+        max-width: 500px;
+        padding: 30px;
+        text-align: center;
+        z-index: 10;
+        animation: fadeIn 1.5s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- 404 HERO --- */
+      .hero-title {
+        position: relative;
+        margin-bottom: 2.5rem;
+      }
+
+      .text-404 {
+        font-size: clamp(5rem, 18vw, 9rem);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+        text-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
+      }
+
+      .accent-divider {
+        width: 80px;
+        height: 2px;
+        background: var(--accent-primary);
+        margin: 15px auto;
+        box-shadow: 0 0 15px var(--accent-glow);
+      }
+
+      /* --- MESSAGE CONTENT --- */
+      .message-section {
+        margin-bottom: 3.5rem;
+      }
+
+      .primary-heading {
+        font-size: 1.4rem;
+        font-weight: 300;
+        letter-spacing: 0.05rem;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+
+      .secondary-desc {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.4);
+        line-height: 1.6;
+        max-width: 380px;
+        margin: 0 auto;
+      }
+
+      /* --- BUTTONS --- */
+      .cta-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .action-btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 18px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: var(--motion-fast);
+        cursor: pointer;
+      }
+
+      .btn-solid {
+        background: transparent;
+        border: 1px solid var(--accent-primary);
+        color: #fff;
+      }
+
+      .btn-solid:hover {
+        background: var(--accent-primary);
+        color: #000;
+        box-shadow: 0 0 30px var(--accent-glow);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .btn-outline:hover {
+        border-color: #fff;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      /* --- FOOTER BRANDING --- */
+      .brand-footer {
+        position: absolute;
+        bottom: 40px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      .logo-footer {
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: 0.4rem;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+
+      .logo-footer span {
+        color: var(--accent-primary);
+      }
+
+      .enterprise-tag {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* --- RESPONSIVE DESKTOP --- */
+      @media (min-width: 768px) {
+        .cta-container {
+          flex-direction: row;
+          justify-content: center;
+          gap: 20px;
+        }
+        .action-btn {
+          max-width: 220px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas-background">
+      <div class="ambient-sweep"></div>
+    </div>
+
+    <main class="error-wrapper" id="content">
+      <section class="hero-title">
+        <h1 class="text-404">404</h1>
+        <div class="accent-divider"></div>
+      </section>
+
+      <section class="message-section">
+        <h2 class="primary-heading">Page Not Found</h2>
+        <p class="secondary-desc">
+          Even the most advanced legal infrastructures experience dead ends.
+          Let's redirect you to a secure portal.
+        </p>
+      </section>
+
+      <nav class="cta-container">
+        <a
+          href="./home.html"
+          class="action-btn btn-solid"
+          onclick="simulateNav(event)"
+          >Return Home</a
+        >
+        <a
+          href="./contact.html"
+          class="action-btn btn-outline"
+          onclick="simulateNav(event)"
+          >Support</a
+        >
+      </nav>
+    </main>
+
+    <!-- <footer class="brand-footer">
+      <div class="logo-footer">Stackly<span>.</span></div>
+      <div class="enterprise-tag">Enterprise Legal Tech</div>
+    </footer> -->
+
+    <script>
+      // High-end interaction engine
+      function simulateNav(e) {
+        e.preventDefault();
+        const btn = e.target;
+        const original = btn.textContent;
+
+        btn.textContent = "REDIRECTING...";
+        btn.style.opacity = "0.6";
+
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.style.opacity = "1";
+        }, 1000);
+      }
+
+      // Parallax Effect
+      document.addEventListener("mousemove", (e) => {
+        const container = document.getElementById("content");
+        const x = (window.innerWidth / 2 - e.pageX) / 50;
+        const y = (window.innerHeight / 2 - e.pageY) / 50;
+        container.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    </script>
+  </body>
+</html>

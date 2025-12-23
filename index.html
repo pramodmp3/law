@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>STACKLY | Premium Legal Counsel</title>
+    <!-- GSAP for Professional Motion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- LOADER -->
+    <div id="loader">
+      <div class="loader-logo" id="loaderText">
+        <span>S</span><span>T</span><span>A</span><span>C</span><span>K</span
+        ><span>L</span><span>Y</span>
+      </div>
+      <div class="loader-line" id="loaderLine"></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <!-- <nav>
+      <a href="#" class="logo">STACKLY</a>
+      <div style="font-size: 0.7rem; letter-spacing: 2px">EST. 1994</div>
+    </nav> -->
+    <nav class="nav-container" id="mainNav">
+      <div class="inner-nav">
+        <div class="logo-box">
+          <img src="./assets/logo.webp" alt="STACKLY" class="logo-img" />
+        </div>
+
+        <ul class="nav-links-desktop">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Home <span class="chevron"></span></a>
+            <div class="desktop-dropdown">
+              <a href="./index.html" class="dropdown-item">HOME1</a>
+              <a href="./home.html" class="dropdown-item">HOME2</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="./serve.html" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="./about.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="./dash.html" class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a href="./blog.html" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="./contact.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+
+        <div class="cta-desktop">
+          <a href="./login.html"><button class="btn-gold">Login</button></a>
+        </div>
+
+        <div class="mobile-controls">
+          <div class="hamburger" id="navToggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay">
+      <div class="mobile-menu-list">
+        <div class="mobile-nav-item">
+          <div class="mobile-nav-link" id="mobileHomeBtn">
+            Home <span class="mobile-chevron" id="mobileChevron"></span>
+          </div>
+          <div class="mobile-sub-menu" id="mobileSubMenu">
+            <a href="./index.html" class="mobile-sub-item">HOME1</a>
+            <a href="./home.html" class="mobile-sub-item">HOME2</a>
+          </div>
+        </div>
+
+        <div class="mobile-nav-item">
+          <a href="./serve.html" class="mobile-nav-link">Services</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./about.html" class="mobile-nav-link">About</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./dash.html" class="mobile-nav-link">Dashboard</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./blog.html" class="mobile-nav-link">Blog</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="./contact.html" class="mobile-nav-link">Contact</a>
+        </div>
+
+        <div style="margin-top: 40px">
+          <a href="./login.html"
+            ><button class="btn-gold" style="width: 100%; padding: 20px">
+              Login Account
+            </button></a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- HERO SECTION -->
+    <header class="hero" id="hero">
+      <div class="hero-bg-container">
+        <div
+          class="hero-slide active"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=2070');
+          "
+        ></div>
+        <div
+          class="hero-slide"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070');
+          "
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('./assets/blog1.png')"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('./assets/about2.webp')"
+        ></div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="reveal-text">Justice Built on Experience.</h1>
+        <p class="reveal-text">
+          Premium legal strategies for corporate leaders and high-stakes
+          litigation across the globe.
+        </p>
+        <a href="./404.html" class="btn reveal-text">Get Legal Consultation</a>
+      </div>
+    </header>
+
+    <!-- CLIENTS MARQUEE -->
+    <div class="client-marquee">
+      <div class="marquee-content" id="marquee">
+        <div class="marquee-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5z" />
+          </svg>
+          VANGUARD GROUP
+        </div>
+        <div class="marquee-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 12l10 10 10-10L12 2zm0 4l6 6-6 6-6-6 6-6z" />
+          </svg>
+          AXON INDUSTRIES
+        </div>
+        <div class="marquee-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"
+            />
+          </svg>
+          MERIDIAN GLOBAL
+        </div>
+        <div class="marquee-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8z"
+            />
+          </svg>
+          ORACLE CORP
+        </div>
+        <div class="marquee-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"
+            />
+          </svg>
+          ZENITH CAPITAL
+        </div>
+        <!-- Duplicate for infinite effect -->
+        <div class="marquee-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5z" />
+          </svg>
+          VANGUARD GROUP
+        </div>
+        <div class="marquee-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 12l10 10 10-10L12 2zm0 4l6 6-6 6-6-6 6-6z" />
+          </svg>
+          AXON INDUSTRIES
+        </div>
+        <div class="marquee-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"
+            />
+          </svg>
+          MERIDIAN GLOBAL
+        </div>
+      </div>
+    </div>
+
+    <!-- WHO WE ARE -->
+    <section id="about">
+      <div class="about-grid">
+        <div class="about-image parallax-img"></div>
+        <div class="about-text">
+          <span class="section-tag">Legacy of Excellence</span>
+          <h2 class="section-title reveal-text">
+            Integrity in every motion, precision in every word.
+          </h2>
+          <p class="reveal-text">
+            Founded on the principles of absolute confidentiality and relentless
+            pursuit of our clients' interests, STACKLY has become a sanctuary
+            for those navigating complex legal landscapes.
+          </p>
+          <p class="reveal-text">
+            Our multidisciplinary approach ensures that whether it's an
+            international merger or a high-profile criminal defense, our clients
+            receive the most sophisticated counsel available.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" style="background: var(--gray-900); max-width: 100%">
+      <div style="max-width: 1400px; margin: 0 auto">
+        <span class="section-tag" style="text-align: center; display: block"
+          >Our Process</span
+        >
+        <h2 class="section-title reveal-text" style="text-align: center">
+          The Path to Resolution
+        </h2>
+        <div class="approach-steps">
+          <div class="step-card">
+            <span class="step-number">01</span>
+            <h3>Case Understanding</h3>
+            <p>
+              Deep-dive analysis into the core variables of your legal
+              challenge.
+            </p>
+          </div>
+          <div class="step-card">
+            <span class="step-number">02</span>
+            <h3>Strategy Planning</h3>
+            <p>
+              Developing non-linear legal tactics to secure a favorable
+              position.
+            </p>
+          </div>
+          <div class="step-card">
+            <span class="step-number">03</span>
+            <h3>Legal Execution</h3>
+            <p>Precise application of law across all relevant jurisdictions.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-number">04</span>
+            <h3>Resolution</h3>
+            <p>Achieving the optimal outcome with lasting legal security.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRACTICE AREAS -->
+    <section id="practice">
+      <span class="section-tag">Services</span>
+      <h2 class="section-title reveal-text">Expertise Across Domains</h2>
+      <div class="practice-grid">
+        <div class="practice-card">
+          <div
+            class="practice-bg"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070');
+            "
+          ></div>
+          <div class="practice-content">
+            <h3>Corporate Law</h3>
+            <p>M&A, Governance, and Global Trade.</p>
+          </div>
+        </div>
+        <div class="practice-card">
+          <div
+            class="practice-bg"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?q=80&w=2064');
+            "
+          ></div>
+          <div class="practice-content">
+            <h3>Criminal Defense</h3>
+            <p>High-stakes white collar representation.</p>
+          </div>
+        </div>
+        <div class="practice-card">
+          <div
+            class="practice-bg"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084');
+            "
+          ></div>
+          <div class="practice-content">
+            <h3>Intellectual Property</h3>
+            <p>Defending innovation and assets.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="testimonials" style="background: var(--charcoal)">
+      <span class="section-tag">The Testimony</span>
+      <h2 class="section-title">Client Insights</h2>
+      <div class="reviews-container">
+        <div class="review-card scroll-effect">
+          <p>
+            "The strategic depth STACKLY brought to our international
+            acquisition was unparalleled. They see the moves before the board
+            does."
+          </p>
+          <cite>— James H. Vance, CEO Vanguard Group</cite>
+        </div>
+        <div class="review-card scroll-effect">
+          <p>
+            "Unflinching defense in the face of immense pressure. When the
+            stakes were at their highest, Stackly delivered a masterclass."
+          </p>
+          <cite>— Helena Richards, Private Equity Investor</cite>
+        </div>
+        <div class="review-card scroll-effect">
+          <p>
+            "The only firm that truly understands the intersection of global
+            technology and maritime law. Speed of execution is simply
+            unmatched."
+          </p>
+          <cite>— Marcus Aurelius, Director Axon Industries</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section id="why" style="background: var(--gray-900); max-width: 100%">
+      <div class="stats-grid" style="max-width: 1200px; margin: 0 auto">
+        <div class="stat-item">
+          <span class="number" data-target="28">0</span>
+          <p>Years of Legacy</p>
+        </div>
+        <div class="stat-item">
+          <span class="number" data-target="1500">0</span>
+          <p>Cases Won</p>
+        </div>
+        <div class="stat-item">
+          <span class="number" data-target="98">0</span>
+          <p>Success Rate %</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2 class="section-title">Common Inquiries</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-trigger">
+            What is your consultation process? <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Every client engagement begins with a high-level assessment by a
+              senior partner. We then proceed to a strategic audit where we
+              identify vulnerabilities and map out a multi-step resolution path.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger">
+            Do you handle international arbitration?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              Absolutely. Our firm maintains standing counsel in London,
+              Singapore, and Dubai, allowing us to manage cross-border disputes
+              with local expertise and global strategy.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger">
+            How do you ensure client confidentiality?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>
+              We utilize military-grade encrypted communication channels and
+              strict internal protocols. Information is siloed on a need-to-know
+              basis even within the firm.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section
+      id="contact"
+      style="
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+          url('https://images.unsplash.com/photo-1523293182086-7651a899d37f?q=80&w=2070')
+            center/cover fixed;
+        padding: 180px 20px;
+        text-align: center;
+        max-width: 100%;
+      "
+    >
+      <h2 class="section-title reveal-text" style="color: white">
+        Securing Your Legacy Starts Here.
+      </h2>
+      <p
+        class="reveal-text"
+        style="margin-bottom: 40px; color: var(--gray-400)"
+      >
+        Speak with a senior partner to discuss your requirements under full NDA.
+      </p>
+      <button class="btn">Schedule Confidential Briefing</button>
+    </section>
+
+    <!-- <footer>
+      <div class="logo">STACKLY</div>
+      <p
+        style="
+          margin-top: 20px;
+          color: var(--gray-400);
+          font-size: 0.8rem;
+          letter-spacing: 1px;
+        "
+      >
+        &copy; 2024 STACKLY INTERNATIONAL LAW. ALL RIGHTS RESERVED.
+      </p>
+    </footer> -->
+    <footer class="stk-footer" id="footer">
+      <div class="stk-bg">
+        <div class="stk-noise"></div>
+        <div class="stk-glow" id="glow"></div>
+      </div>
+
+      <div class="stk-container">
+        <!-- Brand -->
+        <div class="stk-brand">
+          <img
+            src="./assets/logo.webp"
+            alt="Stackly Logo"
+            class="stk-logo"
+            id="logo"
+          />
+          <p class="stk-motto" id="motto">
+            Crafting legal excellence with architectural precision. Founded on
+            the principles of integrity and global innovation.
+          </p>
+          <div class="stk-socials" id="socials">
+            <a href="./404.html" class="stk-icon"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                /></svg
+            ></a>
+            <a href="./404.html" class="stk-icon"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                /></svg
+            ></a>
+            <a href="./404.html" class="stk-icon"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.44-.645 1.44-1.441-.644-1.44-1.44-1.44z"
+                /></svg
+            ></a>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <span class="stk-label">Navigation</span>
+          <ul class="stk-links">
+            <li class="stk-link"><a href="./index.html">HOME</a></li>
+            <li class="stk-link"><a href="./serve.html">SERVICE</a></li>
+            <li class="stk-link"><a href="./about.html">ABOUT</a></li>
+            <li class="stk-link"><a href="./blog.html">BLOG</a></li>
+            <li class="stk-link"><a href="./dash.html">DASHBOARD</a></li>
+            <li class="stk-link"><a href="./contact.html">CONTACT</a></li>
+          </ul>
+        </div>
+
+        <!-- News -->
+        <div>
+          <span class="stk-label">Latest Briefs</span>
+          <div class="stk-news-item">
+            <span>JAN 10, 2025</span>
+            <h4>Future of AI in Corporate Governance</h4>
+          </div>
+          <div class="stk-news-item">
+            <span>JAN 04, 2025</span>
+            <h4>Cross-Border Tech M&A Trends</h4>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="stk-newsletter">
+          <span class="stk-label">The Counsel</span>
+          <p
+            style="
+              font-size: 13px;
+              color: var(--text-muted);
+              margin-bottom: -10px;
+            "
+          >
+            Monthly strategic briefings.
+          </p>
+          <div class="stk-input-wrap" id="newsletter">
+            <input type="email" class="stk-input" placeholder="Email Address" />
+            <button class="stk-btn">Join</button>
+          </div>
+          <div
+            style="font-size: 12px; color: var(--text-muted); line-height: 1.5"
+          >
+            <span style="color: var(--gold)">Address:</span> 1200 Wall St,
+            NYC<br />
+            <span style="color: var(--gold)">Enquiries:</span> +1 800 STACKLY
+          </div>
+        </div>
+      </div>
+
+      <div class="stk-bottom">
+        <span>© 2025 STACKLY INTERNATIONAL LLP</span>
+        <span>PRIVACY / TERMS / SECURITY</span>
+      </div>
+    </footer>
+
+    <script src="./footer.js"></script>
+    <script src="./nav.js"></script>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      // --- LOADER LOGIC ---
+      window.onload = () => {
+        const tl = gsap.timeline();
+
+        tl.to("#loaderText span", {
+          y: 0,
+          stagger: 0.1,
+          duration: 1,
+          ease: "expo.out",
+        })
+          .to(
+            "#loaderLine",
+            {
+              width: "240px",
+              duration: 1,
+              ease: "power4.inOut",
+            },
+            "-=0.5"
+          )
+          .to("#loader", {
+            opacity: 0,
+            duration: 1,
+            delay: 0.3,
+            onComplete: () => {
+              document.getElementById("loader").style.display = "none";
+              initPageAnimations();
+            },
+          });
+      };
+
+      function initPageAnimations() {
+        // Hero Slider
+        const slides = document.querySelectorAll(".hero-slide");
+        let currentSlide = 0;
+        setInterval(() => {
+          slides[currentSlide].classList.remove("active");
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].classList.add("active");
+        }, 5000);
+
+        // Reveal Text
+        gsap.utils.toArray(".reveal-text").forEach((el) => {
+          gsap.from(el, {
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+            },
+            y: 40,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out",
+          });
+        });
+
+        // Marquee
+        gsap.to("#marquee", {
+          xPercent: -50,
+          repeat: -1,
+          duration: 30,
+          ease: "linear",
+        });
+
+        // Stats Counter
+        gsap.utils.toArray(".number").forEach((num) => {
+          const target = parseInt(num.getAttribute("data-target"));
+          gsap.to(num, {
+            scrollTrigger: {
+              trigger: num,
+              start: "top 90%",
+            },
+            innerText: target,
+            duration: 2.5,
+            snap: { innerText: 1 },
+            ease: "power2.out",
+          });
+        });
+
+        // Practice Cards Stagger
+        gsap.from(".practice-card", {
+          scrollTrigger: {
+            trigger: ".practice-grid",
+            start: "top 80%",
+          },
+          y: 60,
+          opacity: 0,
+          stagger: 0.2,
+          duration: 1,
+          ease: "power3.out",
+        });
+
+        // Reviews Scroll Effect
+        gsap.utils.toArray(".scroll-effect").forEach((card) => {
+          gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: "top 95%",
+              end: "top 40%",
+              scrub: 1,
+            },
+            opacity: 0.3,
+            scale: 0.9,
+            y: 50,
+          });
+        });
+      }
+
+      // FAQ Toggle
+      document.querySelectorAll(".faq-trigger").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const content = btn.nextElementSibling;
+          const isOpen =
+            content.style.height !== "0px" && content.style.height !== "";
+
+          // Close others
+          document.querySelectorAll(".faq-content").forEach((c) => {
+            gsap.to(c, { height: 0, duration: 0.4 });
+            c.previousElementSibling.querySelector(".faq-icon").innerText = "+";
+          });
+
+          if (!isOpen) {
+            gsap.to(content, { height: "auto", duration: 0.4 });
+            btn.querySelector(".faq-icon").innerText = "-";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

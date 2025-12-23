@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>STACKLY | Secure Legal Portal</title>
+    <style>
+      /* * STACKLY CORE STYLES
+         * Focused on high-contrast visibility and elite legal aesthetic.
+         * Primary Accent: Cyber Blue (#00d4ff)
+         * Secondary Accent: Titanium Silver (#e2e8f0)
+         */
+
+      :root {
+        --color-obsidian: #050506;
+        --color-deep-navy: #0a0f1a;
+        --color-titanium: #f8fafc;
+        --accent-primary: #00d4ff;
+        --accent-secondary: #e2e8f0;
+        --accent-glow: rgba(0, 212, 255, 0.2);
+        --glass-bg: rgba(15, 23, 42, 0.85);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --font-main: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        background-color: var(--color-obsidian);
+        color: var(--color-titanium);
+        font-family: var(--font-main);
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* --- STABLE BACKGROUND --- */
+      .background-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: radial-gradient(
+          circle at center,
+          var(--color-deep-navy) 0%,
+          var(--color-obsidian) 100%
+        );
+      }
+
+      .ambient-light {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          transparent 40%,
+          rgba(0, 212, 255, 0.03) 50%,
+          transparent 60%
+        );
+        animation: sweep 10s ease-in-out infinite;
+      }
+
+      @keyframes sweep {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* --- CONTAINER --- */
+      .auth-wrapper {
+        width: 100%;
+        max-width: 440px;
+        padding: 20px;
+        z-index: 10;
+        animation: fadeIn 1s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- BRANDING --- */
+      .brand-section {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .brand-logo {
+        font-size: 2.5rem;
+        font-weight: 800;
+        letter-spacing: 0.5rem;
+        color: #ffffff;
+        text-transform: uppercase;
+      }
+
+      .brand-logo span {
+        color: var(--accent-primary);
+      }
+
+      .brand-subtitle {
+        font-size: 0.7rem;
+        letter-spacing: 0.3rem;
+        text-transform: uppercase;
+        color: var(--accent-secondary);
+        margin-top: 10px;
+        opacity: 0.8;
+      }
+
+      /* --- LOGIN CARD --- */
+      .auth-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 4px;
+        padding: 40px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        perspective: 1000px;
+      }
+
+      .auth-card-top-line {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent-primary),
+          transparent
+        );
+        margin-bottom: 30px;
+        opacity: 0.5;
+      }
+
+      /* --- FORM ELEMENTS --- */
+      .input-wrapper {
+        position: relative;
+        margin-bottom: 30px;
+      }
+
+      .field-input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 12px 0;
+        color: #ffffff;
+        font-size: 1rem;
+        outline: none;
+        transition: var(--transition-smooth);
+        border-radius: 0;
+      }
+
+      .field-label {
+        position: absolute;
+        left: 0;
+        top: 12px;
+        color: rgba(255, 255, 255, 0.4);
+        pointer-events: none;
+        transition: var(--transition-smooth);
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.1rem;
+      }
+
+      .field-input:focus ~ .field-label,
+      .field-input:not(:placeholder-shown) ~ .field-label {
+        top: -15px;
+        font-size: 0.65rem;
+        color: var(--accent-primary);
+      }
+
+      .field-input:focus {
+        border-bottom-color: var(--accent-primary);
+      }
+
+      /* --- PASSWORD TOGGLE --- */
+      .pass-toggle {
+        position: absolute;
+        right: 0;
+        top: 12px;
+        cursor: pointer;
+        font-size: 0.6rem;
+        color: var(--accent-primary);
+        text-transform: uppercase;
+        font-weight: bold;
+        opacity: 0.7;
+      }
+
+      .pass-toggle:hover {
+        opacity: 1;
+      }
+
+      /* --- BUTTON --- */
+      .submit-trigger {
+        width: 100%;
+        background: transparent;
+        border: 1px solid var(--accent-primary);
+        padding: 18px;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        font-weight: 700;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        margin-top: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-trigger:hover {
+        background: var(--accent-primary);
+        color: #000000;
+        box-shadow: 0 0 25px var(--accent-glow);
+      }
+
+      /* --- FOOTER & LINKS --- */
+      .auth-extras {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+        font-size: 0.75rem;
+      }
+
+      .auth-link {
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        transition: var(--transition-smooth);
+      }
+
+      .auth-link:hover {
+        color: var(--accent-secondary);
+      }
+
+      .signup-prompt {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        text-align: center;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .signup-link {
+        color: var(--accent-primary);
+        text-decoration: none;
+        font-weight: 700;
+        margin-left: 5px;
+        transition: var(--transition-smooth);
+      }
+
+      .signup-link:hover {
+        text-decoration: underline;
+      }
+
+      .secure-footer {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+        color: rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .lock-svg {
+        width: 12px;
+        height: 12px;
+        fill: currentColor;
+      }
+
+      /* --- MOBILE OPTIMIZATION --- */
+      @media (max-width: 480px) {
+        .auth-card {
+          padding: 30px 20px;
+        }
+        .brand-logo {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-layer">
+      <div class="ambient-light"></div>
+    </div>
+
+    <div class="auth-wrapper">
+      <header class="brand-section">
+        <h1 class="brand-logo">Stackly<span>.</span></h1>
+        <p class="brand-subtitle">Legal Enterprise Portal</p>
+      </header>
+
+      <main class="auth-card">
+        <div class="auth-card-top-line"></div>
+
+        <form id="loginForm" onsubmit="handleAuth(event)">
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="userid"
+              class="field-input"
+              placeholder=" "
+              required
+            />
+            <label for="userid" class="field-label">Access Identity</label>
+          </div>
+
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="secret"
+              class="field-input"
+              placeholder=" "
+              required
+            />
+            <label for="secret" class="field-label">Encryption Key</label>
+            <span class="pass-toggle" onclick="toggleSecret()">Show</span>
+          </div>
+
+          <button type="submit" class="submit-trigger" id="submitBtn">
+            Establish Secure Link
+          </button>
+
+          <div class="auth-extras">
+            <label
+              style="
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              "
+            >
+              <input
+                type="checkbox"
+                style="accent-color: var(--accent-primary)"
+              />
+              <span>Persist Session</span>
+            </label>
+            <a href="#" class="auth-link">Key Recovery</a>
+          </div>
+        </form>
+
+        <div class="signup-prompt">
+          New to the platform?
+          <a href="#" class="signup-link">Request Onboarding</a>
+        </div>
+
+        <div class="secure-footer">
+          <svg class="lock-svg" viewBox="0 0 24 24">
+            <path
+              d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7c0-2.757-2.243-5-5-5zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7zm11 13H6v-8h12v8z"
+            />
+          </svg>
+          AES-256 Cloud Security
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // --- INTERACTION LOGIC ---
+
+      function toggleSecret() {
+        const input = document.getElementById("secret");
+        const toggle = document.querySelector(".pass-toggle");
+        if (input.type === "password") {
+          input.type = "text";
+          toggle.textContent = "Hide";
+        } else {
+          input.type = "password";
+          toggle.textContent = "Show";
+        }
+      }
+
+      function handleAuth(e) {
+        e.preventDefault();
+        const btn = document.getElementById("submitBtn");
+        const originalText = btn.textContent;
+
+        btn.textContent = "AUTHORIZING...";
+        btn.style.opacity = "0.7";
+        btn.style.pointerEvents = "none";
+
+        // Simulate high-end server check
+        setTimeout(() => {
+          btn.textContent = "ACCESS GRANTED";
+          btn.style.background = "#059669";
+          btn.style.borderColor = "#059669";
+
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = "transparent";
+            btn.style.borderColor = "var(--accent-primary)";
+            btn.style.opacity = "1";
+            btn.style.pointerEvents = "all";
+            document.getElementById("loginForm").reset();
+          }, 2000);
+        }, 1800);
+      }
+
+      // Parallax depth for the card
+      document.addEventListener("mousemove", (e) => {
+        const x = (window.innerWidth / 2 - e.pageX) / 45;
+        const y = (window.innerHeight / 2 - e.pageY) / 45;
+        const card = document.querySelector(".auth-card");
+        if (card) {
+          card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <title>STACKLY | Intelligence Engine</title>
+    <!-- GSAP & ScrollTrigger: The Cinematic Motion Standard -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+      :root {
+        --bg: #050505;
+        --panel: rgba(15, 15, 17, 0.8);
+        --border: rgba(255, 255, 255, 0.08);
+        --gold: #c5a059;
+        --gold-glow: rgba(197, 160, 89, 0.4);
+        --ivory: #f4f1ea;
+        --dim: #777777;
+        --serif: "Georgia", serif;
+        --sans: "Inter", -apple-system, sans-serif;
+        --safe-pad: clamp(1.2rem, 6vw, 3rem);
+      }
+
+      /* --- FOUNDATION --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--ivory);
+        font-family: var(--sans);
+        overflow-x: hidden;
+        line-height: 1.4;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_pnt_noise.png");
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      .vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at center,
+          transparent 0%,
+          rgba(0, 0, 0, 0.9) 100%
+        );
+        z-index: 2;
+      }
+
+      .label-gold {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+        color: var(--gold);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      /* --- 1. DATA HERO --- */
+      .hero {
+        height: 100svh;
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .hero-visual {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+
+      .hero-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.25) contrast(1.2);
+      }
+
+      .hero-stats {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        margin-top: 3rem;
+        z-index: 10;
+        width: 100%;
+      }
+
+      .hero-stat-item {
+        opacity: 0;
+        transform: translateY(20px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-stat-value {
+        font-family: var(--serif);
+        font-size: 1.8rem;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      /* --- 2. METRIC PANELS --- */
+      .metrics-container {
+        padding: 5vh var(--safe-pad);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        background: var(--bg);
+      }
+
+      .metric-card {
+        background: var(--panel);
+        backdrop-filter: blur(15px);
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      .count-up {
+        font-family: var(--serif);
+        font-size: 2.8rem;
+        color: var(--ivory);
+        line-height: 1;
+      }
+
+      /* --- 3. SCROLL-SCRUBBED LINE CHART --- */
+      .chart-section {
+        padding: 10vh var(--safe-pad);
+        background: #000;
+      }
+
+      .chart-wrapper {
+        width: 100%;
+        position: relative;
+        margin-top: 2rem;
+      }
+
+      .chart-svg {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .chart-path {
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 2.5;
+        stroke-dasharray: 1200;
+        stroke-dashoffset: 1200;
+      }
+
+      .axis-label {
+        font-size: 10px;
+        fill: var(--dim);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .grid-line {
+        stroke: var(--border);
+        stroke-width: 1;
+        stroke-dasharray: 4;
+      }
+
+      /* --- 4. RADIAL & BAR ANALYTICS --- */
+      .dual-analytics {
+        padding: 10vh var(--safe-pad);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+
+      .radial-stat {
+        text-align: center;
+        position: relative;
+      }
+
+      .radial-svg {
+        width: 160px;
+        height: 160px;
+        transform: rotate(-90deg);
+      }
+
+      .radial-bg {
+        fill: none;
+        stroke: var(--border);
+        stroke-width: 8;
+      }
+
+      .radial-progress {
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 8;
+        stroke-dasharray: 440;
+        stroke-dashoffset: 440;
+        stroke-linecap: round;
+      }
+
+      .radial-value {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: var(--serif);
+        font-size: 1.8rem;
+      }
+
+      .bar-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .bar-container {
+        width: 100%;
+      }
+
+      .bar-label-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        color: var(--dim);
+      }
+
+      .bar-bg {
+        width: 100%;
+        height: 4px;
+        background: var(--border);
+        position: relative;
+      }
+
+      .bar-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: var(--gold);
+        width: 0%;
+        box-shadow: 0 0 10px var(--gold-glow);
+      }
+
+      /* --- 5. DISTRIBUTION BAR CHART --- */
+      .distribution-section {
+        padding: 10vh var(--safe-pad);
+        background: var(--bg);
+      }
+
+      .dist-chart {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      .dist-bar-item {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      .dist-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 0.75rem;
+      }
+
+      .dist-name {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        letter-spacing: 0.02em;
+      }
+
+      .dist-value {
+        font-family: var(--sans);
+        font-size: 0.8rem;
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      .dist-track {
+        height: 2px;
+        background: var(--border);
+        width: 100%;
+        position: relative;
+      }
+
+      .dist-fill {
+        position: absolute;
+        height: 100%;
+        background: var(--gold);
+        width: 0%;
+        box-shadow: 0 0 15px var(--gold-glow);
+      }
+
+      /* --- 6. DATA BREAKS --- */
+      .data-break {
+        height: 60vh;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .data-break img {
+        position: absolute;
+        width: 100%;
+        height: 140%;
+        object-fit: cover;
+        top: -20%;
+        filter: brightness(0.3);
+      }
+
+      /* --- 7. ACTIONS & FINALE --- */
+      .finale {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--safe-pad);
+        text-align: center;
+        background: #000;
+      }
+
+      .btn-action {
+        width: 100%;
+        padding: 1.5rem;
+        background: var(--gold);
+        color: #000;
+        border: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        font-size: 0.75rem;
+        margin-top: 2rem;
+        cursor: pointer;
+      }
+      .btn-action:hover {
+        background: var(--ivory);
+        /* letter-spacing: 0.8em; */
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Desktop Adjustments */
+      @media (min-width: 1024px) {
+        .metrics-container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+        .dual-analytics {
+          grid-template-columns: 1fr 1fr;
+          align-items: center;
+        }
+        .hero-stats {
+          gap: 8rem;
+        }
+        .chart-section,
+        .distribution-section {
+          max-width: 1000px;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- 1. HERO DATA REVEAL -->
+      <section class="hero">
+        <div class="hero-visual">
+          <img
+            src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=2000"
+            alt="Legal Data Flow"
+          />
+          <div class="vignette"></div>
+        </div>
+        <div style="position: relative; z-index: 10; width: 100%">
+          <span class="label-gold">System Initialized</span>
+          <h1
+            style="
+              font-family: var(--serif);
+              font-size: clamp(2.2rem, 10vw, 5.5rem);
+              font-style: italic;
+              margin-bottom: 0.5rem;
+            "
+          >
+            Analytical Intelligence
+          </h1>
+
+          <!-- Fixed Aligned Stats -->
+          <div class="hero-stats">
+            <div class="hero-stat-item">
+              <span class="hero-stat-value" data-target="98">0%</span>
+              <span
+                class="label-gold"
+                style="font-size: 0.55rem; margin-bottom: 0"
+                >Success</span
+              >
+            </div>
+            <div class="hero-stat-item">
+              <span class="hero-stat-value" data-target="14">0</span>
+              <span
+                class="label-gold"
+                style="font-size: 0.55rem; margin-bottom: 0"
+                >Partners</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. KEY METRIC PANELS -->
+      <section class="metrics-container">
+        <div class="metric-card">
+          <span class="label-gold" style="font-size: 0.5rem">Active Cases</span>
+          <span class="count-up" data-target="342">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="label-gold" style="font-size: 0.5rem">Settlements</span>
+          <span class="count-up" data-target="128">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="label-gold" style="font-size: 0.5rem">Hearings</span>
+          <span class="count-up" data-target="16">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="label-gold" style="font-size: 0.5rem">Documents</span>
+          <span class="count-up" data-target="892">0</span>
+        </div>
+      </section>
+
+      <!-- 3. SCROLL-SCRUBBED LINE CHART -->
+      <section class="chart-section">
+        <span class="label-gold">7-Month Velocity Trend</span>
+        <div class="chart-wrapper">
+          <svg class="chart-svg" viewBox="0 -20 1000 420">
+            <line x1="0" y1="350" x2="1000" y2="350" class="grid-line" />
+            <line x1="0" y1="200" x2="1000" y2="200" class="grid-line" />
+            <line x1="0" y1="50" x2="1000" y2="50" class="grid-line" />
+
+            <text x="-5" y="355" class="axis-label" text-anchor="end">Low</text>
+            <text x="-5" y="205" class="axis-label" text-anchor="end">Mid</text>
+            <text x="-5" y="55" class="axis-label" text-anchor="end">Peak</text>
+
+            <text x="0" y="385" class="axis-label" text-anchor="middle">
+              Jun
+            </text>
+            <text x="150" y="385" class="axis-label" text-anchor="middle">
+              Jul
+            </text>
+            <text x="300" y="385" class="axis-label" text-anchor="middle">
+              Aug
+            </text>
+            <text x="450" y="385" class="axis-label" text-anchor="middle">
+              Sep
+            </text>
+            <text x="600" y="385" class="axis-label" text-anchor="middle">
+              Oct
+            </text>
+            <text x="750" y="385" class="axis-label" text-anchor="middle">
+              Nov
+            </text>
+            <text x="1000" y="385" class="axis-label" text-anchor="middle">
+              Dec
+            </text>
+
+            <path
+              class="chart-path"
+              d="M0,350 L150,300 L300,320 L450,150 L600,200 L750,50 L1000,80"
+            />
+          </svg>
+        </div>
+      </section>
+
+      <!-- 4. DISTRIBUTION BAR CHART -->
+      <section class="distribution-section">
+        <span class="label-gold">Sector Portfolio Distribution</span>
+        <div class="dist-chart">
+          <div class="dist-bar-item">
+            <div class="dist-info">
+              <span class="dist-name">Corporate Litigation</span>
+              <span class="dist-value" data-target="82">0%</span>
+            </div>
+            <div class="dist-track">
+              <div class="dist-fill" data-width="82%"></div>
+            </div>
+          </div>
+          <div class="dist-bar-item">
+            <div class="dist-info">
+              <span class="dist-name">Intellectual Property</span>
+              <span class="dist-value" data-target="64">0%</span>
+            </div>
+            <div class="dist-track">
+              <div class="dist-fill" data-width="64%"></div>
+            </div>
+          </div>
+          <div class="dist-bar-item">
+            <div class="dist-info">
+              <span class="dist-name">Criminal Defense</span>
+              <span class="dist-value" data-target="41">0%</span>
+            </div>
+            <div class="dist-track">
+              <div class="dist-fill" data-width="41%"></div>
+            </div>
+          </div>
+          <div class="dist-bar-item">
+            <div class="dist-info">
+              <span class="dist-name">Global Compliance</span>
+              <span class="dist-value" data-target="93">0%</span>
+            </div>
+            <div class="dist-track">
+              <div class="dist-fill" data-width="93%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ANALYTICS DUAL VIEW -->
+      <section class="dual-analytics">
+        <div class="radial-stat">
+          <span class="label-gold">Case Win Velocity</span>
+          <svg class="radial-svg" viewBox="0 0 160 160">
+            <circle class="radial-bg" cx="80" cy="80" r="70" />
+            <circle
+              class="radial-progress"
+              cx="80"
+              cy="80"
+              r="70"
+              data-pct="88"
+            />
+          </svg>
+          <div class="radial-value">0%</div>
+          <p
+            style="
+              font-size: 0.6rem;
+              color: var(--dim);
+              margin-top: 1rem;
+              letter-spacing: 0.1em;
+            "
+          >
+            +12% vs PREVIOUS YEAR
+          </p>
+        </div>
+        <div class="bar-group">
+          <span class="label-gold">Resource Workload</span>
+          <div class="bar-container">
+            <div class="bar-label-row">
+              <span>Partners</span><span>72%</span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill" data-width="72%"></div>
+            </div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-label-row">
+              <span>Associates</span><span>45%</span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill" data-width="45%"></div>
+            </div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-label-row">
+              <span>AI Reviewers</span><span>91%</span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill" data-width="91%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. IMMERSIVE DATA BREAK -->
+      <section class="data-break">
+        <img
+          src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=2000"
+          id="parallaxImg"
+        />
+        <div class="vignette"></div>
+        <div style="position: relative; z-index: 10; padding: var(--safe-pad)">
+          <span class="label-gold">Global Reach</span>
+          <h2 style="font-family: var(--serif); font-size: 2rem">
+            24 Jurisdictions Managed.
+          </h2>
+        </div>
+      </section>
+
+      <!-- 7. FINALE SUMMARY -->
+      <section class="finale">
+        <span class="label-gold">Performance Review</span>
+        <h2
+          style="
+            font-family: var(--serif);
+            font-size: clamp(2rem, 8vw, 4rem);
+            margin-bottom: 2rem;
+          "
+        >
+          Decisions fueled by<br />unrivaled data.
+        </h2>
+        <a href="./404.html"
+          ><button class="btn-action">Return to Command Center</button></a
+        >
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const animateCounter = (el, target, suffix = "") => {
+          gsap.to(el, {
+            innerText: target,
+            duration: 2,
+            snap: { innerText: 1 },
+            ease: "power2.out",
+            onUpdate: function () {
+              el.innerText = Math.ceil(this.targets()[0].innerText) + suffix;
+            },
+          });
+        };
+
+        // 1. Hero Entrance
+        gsap.to(".hero-stat-item", {
+          opacity: 1,
+          y: 0,
+          stagger: 0.2,
+          duration: 1,
+          onStart: () => {
+            document.querySelectorAll(".hero-stat-value").forEach((el) => {
+              const target = el.dataset.target;
+              const isPercent = target === "98";
+              animateCounter(el, target, isPercent ? "%" : "");
+            });
+          },
+        });
+
+        // 2. Metric Card Reveals
+        gsap.utils.toArray(".metric-card").forEach((card) => {
+          const count = card.querySelector(".count-up");
+          gsap.to(card, {
+            opacity: 1,
+            scale: 1,
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              onEnter: () => animateCounter(count, count.dataset.target),
+            },
+          });
+        });
+
+        // 3. Line Path Scrubbing
+        gsap.to(".chart-path", {
+          strokeDashoffset: 0,
+          scrollTrigger: {
+            trigger: ".chart-section",
+            start: "top 60%",
+            end: "bottom 40%",
+            scrub: 1.5,
+          },
+        });
+
+        // 4. Sector Distribution
+        gsap.utils.toArray(".dist-bar-item").forEach((item) => {
+          const fill = item.querySelector(".dist-fill");
+          const val = item.querySelector(".dist-value");
+
+          gsap.to(item, {
+            opacity: 1,
+            x: 0,
+            duration: 1,
+            scrollTrigger: {
+              trigger: item,
+              start: "top 90%",
+              onEnter: () => {
+                gsap.to(fill, {
+                  width: fill.dataset.width,
+                  duration: 1.5,
+                  ease: "power2.out",
+                });
+                animateCounter(val, val.dataset.target, "%");
+              },
+            },
+          });
+        });
+
+        // 5. Radial Progress
+        gsap.to(".radial-progress", {
+          strokeDashoffset: function (i, target) {
+            const pct = target.dataset.pct;
+            return 440 - (440 * pct) / 100;
+          },
+          scrollTrigger: {
+            trigger: ".radial-stat",
+            start: "top 80%",
+            onEnter: () => {
+              const val = document.querySelector(".radial-value");
+              animateCounter(val, 88, "%");
+            },
+          },
+        });
+
+        // 6. Workload Bar Growth
+        gsap.utils.toArray(".bar-fill").forEach((bar) => {
+          gsap.to(bar, {
+            width: bar.dataset.width,
+            duration: 1.5,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: bar,
+              start: "top 95%",
+            },
+          });
+        });
+
+        // 7. Parallax
+        gsap.to("#parallaxImg", {
+          yPercent: 20,
+          scrollTrigger: {
+            trigger: ".data-break",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        const btn = document.querySelector(".btn-action");
+        btn.addEventListener("touchstart", () =>
+          gsap.to(btn, { scale: 0.98, duration: 0.1 })
+        );
+        btn.addEventListener("touchend", () =>
+          gsap.to(btn, { scale: 1, duration: 0.1 })
+        );
+      });
+    </script>
+  </body>
+</html>
